@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Sdk2SampleDemo</string>
+
+    <!-- Account Setup-->
+    <string name="test_url">Test URL</string>
+    <string name="login_id">Login ID</string>
+    <string name="password">Password</string>
+    <string name="merchant_id">Merchant ID</string>
+    <string name="product_id">Product ID</string>
+    <string name="product">Product Name</string>
+    <string name="language">Language</string>
+    <string name="save_account">Save Account</string>
+    <string name="edit_account">Edit Account</string>
+    <string name="debaug_mode">Debug Mode</string>
+    <string name="off">Off</string>
+    <string name="selfie_id_to_match"> Selfie to ID Face Match&#160;(%s)</string>
+    <string name="on"> On</string>
+    <string name="initialize">INITIALIZE</string>
+    <string name="enter_url">Enter URL</string>
+    <string name="enter_login_id">Enter Login Id</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_merchant_id">Enter Merchant ID</string>
+    <string name="enter_product_id">Enter Product ID</string>
+    <string name="enter_product_name">Entdr Product Name</string>
+    <string name="camera_permission">Need to enable CAMERA permission.</string>
+    <string name="customize_ui_configuration">Customize UI Configuration</string>
+    <string name="real">REAL FACE</string>
+    <string name="spoof">SPOOF FACE</string>
+    <string name="spoof_document">SPOOF DOCUMENT</string>
+    <string name="full_name">Full Name</string>
+    <string name="empty_data">Empty Data</string>
+    <string name="dob">Date Of Birth</string>
+    <string name="document_number">Document Number</string>
+    <string name="id_issue_date">Id Issue Date</string>
+    <string name="id_expiry_date">Expiry Date</string>
+    <string name="address">Address</string>
+    <string name="gender">Gender</string>
+    <string name="enrolled_date">Enrolled Date</string>
+    <string name="client_customer_num">Client Customer Number</string>
+    <string name="negative_media">Negative Media</string>
+    <string name="watch_list">Watch List</string>
+    <string name="pep">Pep</string>
+    <string name="aml_kyc_result">AML and KYC result</string>
+    <string name="dmv_result">DMV resut</string>
+</resources>

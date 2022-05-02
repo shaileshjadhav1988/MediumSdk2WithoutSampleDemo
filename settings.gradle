@@ -1,0 +1,2 @@
+rootProject.name = "MediumSdk2SampleDemo"
+include ':app'

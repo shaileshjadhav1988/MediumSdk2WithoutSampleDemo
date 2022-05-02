@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "840247829444",
+    "project_id": "identitysdk-2",
+    "storage_bucket": "identitysdk-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840247829444:android:bf8c306808bdeb5bd6ba91",
+        "android_client_info": {
+          "package_name": "com.idmission.sdk2.medium.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840247829444-uqlob1i2n5q6o7jmtmk68844irah3sah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsaFVt8ZIjGC41BQL6GFwv0ZRVh3hOIEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840247829444-uqlob1i2n5q6o7jmtmk68844irah3sah.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "840247829444-5cl4fb38jo0jbb4apo73fd7liqd9rfhc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.idmission.SDK2.IdentityMedium",
+                "app_store_id": "1616851293"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

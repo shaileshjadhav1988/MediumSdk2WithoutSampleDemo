@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServiceCallActivity">
+
+    <Button
+        android:id="@+id/service_id_50"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete KYC" />
+    <Button
+        android:id="@+id/processed_captures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/service_id_50"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:text="View Processed Captures" />
+
+    <Button
+        android:id="@+id/final_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/processed_captures"
+        android:layout_centerHorizontal="true"
+        android:text="Final Submit" />
+
+
+    <ProgressBar
+        android:id="@+id/indeterminateBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#F0F5F5</color>
+
+    <color name="gray">#A0A0A0</color>
+    <color name="gray_light">#DCDCDC</color>
+    <color name="gray_dark">#616161</color>
+    <color name="end_color">#009EA0</color>
+    <color name="color_1C2B48">#1C2B48</color>
+    <color name="color_F4F8FB">#F4F8FB</color>
+    <color name="color_80ffffff">#80ffffff</color>
+    <color name="color_00A5A6">#00A5A6</color>
+    <color name="color_DCDCDC">#DCDCDC</color>
+    <color name="color_839BB1">#839BB1</color>
+    <color name="color_121C2D">#121C2D</color>
+    <color name="color_CC121C2D">#CC121C2D</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="color_47004380">#47004380</color>
+    <color name="color_B8CBDC">#B8CBDC</color>
+    <color name="color_FF9F30">#FF9F30</color>
+    <color name="color_707070">#707070</color>
+    <color name="color_239500">#239500</color>
+    <color name="color_15AD00">#15AD00</color>
+    <color name="color_ad0000">#ad0000</color>
+    <color name="color_EE000000">#EE000000</color>
+    <color name="color_2FBCEF">#2FBCEF</color>
+    <color name="color_5CBAEA">#5CBAEA</color>
+</resources>
