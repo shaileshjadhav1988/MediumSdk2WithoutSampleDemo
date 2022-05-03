@@ -62,7 +62,11 @@ class MainActivity : AppCompatActivity() {
                     isSDKinit = true
                 }
             }.invokeOnCompletion {
-                startActivity(Intent(this,ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                if(isSDKinit){
+                    startActivity(Intent(this,ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                }else{
+                    Toast.makeText(this@MainActivity,"Error: Invalid login id or Password",Toast.LENGTH_SHORT).show()
+                }
                 hideProgress()
             }
 
