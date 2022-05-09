@@ -58,9 +58,7 @@ class MainActivity : AppCompatActivity() {
                         enableDebug = false)
 
                 }
-                if (response.errorStatus==null){
-                    isSDKinit = true
-                }
+                isSDKinit = response.result?.employeeInterface?.loginRS?.statusData?.statusCode?.equals(0) == true
             }.invokeOnCompletion {
                 if(isSDKinit){
                     startActivity(Intent(this,ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
