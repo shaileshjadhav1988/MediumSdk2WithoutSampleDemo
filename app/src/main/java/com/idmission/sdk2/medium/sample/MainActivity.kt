@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val edtUrl=findViewById<EditText>(R.id.edit_text_url)
             edtUrl.setText(initializeApiBaseUrl)
+        val edApiUrl = findViewById<EditText>(R.id.edit_api_text_url)
+        edApiUrl.setText(apiBaseUrl)
         val edtLogin=findViewById<EditText>(R.id. edit_text_login_id)
             edtLogin.setText(loginID)
         val edtPassword=findViewById<EditText>(R.id.edit_text_password)
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     response = IdentityProofingSDK.initialize(
                         this@MainActivity,
                         edtUrl.text.toString(),
-                        apiBaseUrl,
+                        edApiUrl.text.toString(),
                         edtLogin.text.toString(),
                         edtPassword.text.toString(),
                         edtMerchantId.text.toString().toLong(),
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 if(isSDKinit){
                     startActivity(Intent(this,ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                 }else{
-                    Toast.makeText(this@MainActivity,"Error: Invalid login id or Password",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity,"Error: SDK initialization credentials are not correct",Toast.LENGTH_SHORT).show()
                 }
                 hideProgress()
             }

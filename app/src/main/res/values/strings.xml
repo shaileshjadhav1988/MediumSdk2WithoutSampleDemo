@@ -2,7 +2,8 @@
     <string name="app_name">Sdk2SampleDemo</string>
 
     <!-- Account Setup-->
-    <string name="test_url">Test URL</string>
+    <string name="test_url">Template/Model URL</string>
+    <string name="api_url">API Base URL</string>
     <string name="login_id">Login ID</string>
     <string name="password">Password</string>
     <string name="merchant_id">Merchant ID</string>
