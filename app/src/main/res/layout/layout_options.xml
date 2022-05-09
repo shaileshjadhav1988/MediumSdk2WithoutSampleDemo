@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+        <RadioGroup
+            android:id="@+id/rg_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb_without_back"
+                android:text="Capture Without Back"
+                android:textSize="@dimen/sp_16"
+                android:padding="@dimen/dp_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_with_back"
+                android:text="Capture With Back"
+                android:padding="@dimen/dp_5"
+                android:textSize="@dimen/sp_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/rb_document"
+                android:text="Select Document Type"
+                android:padding="@dimen/dp_5"
+                android:textSize="@dimen/sp_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+        <LinearLayout
+            android:id="@+id/ll_document_info"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="ID Type"
+                android:textAppearance="@style/TitleTextAppearance.RobotoRegular" />
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_id_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_spinner"
+                android:imeOptions="actionDone"
+                android:minHeight="@dimen/dp_10"
+                android:spinnerMode="dropdown"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.RobotoRegular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_country_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Country"
+                android:layout_marginTop="@dimen/dp_5"
+                android:textAppearance="@style/TitleTextAppearance.RobotoRegular"/>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_spinner"
+                android:imeOptions="actionDone"
+                android:minHeight="@dimen/dp_10"
+                android:spinnerMode="dropdown"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.RobotoRegular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_state_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:layout_marginTop="@dimen/dp_5"
+                android:textAppearance="@style/TitleTextAppearance.RobotoRegular"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_spinner"
+                android:imeOptions="actionDone"
+                android:minHeight="@dimen/dp_10"
+                android:spinnerMode="dropdown"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.RobotoRegular" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:background="@android:color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:letterSpacing="0"
+            android:padding="@dimen/dp_12"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

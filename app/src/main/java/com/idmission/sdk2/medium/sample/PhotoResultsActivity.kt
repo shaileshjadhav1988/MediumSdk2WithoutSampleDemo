@@ -80,7 +80,6 @@ internal class PhotoResultsActivity : Activity() {
         val detection = processedCaptures[0] as ProcessedCapture.LiveFaceDetectionResult.RealFace
         Glide.with(photoResultImageView).load(detection.file).into(photoResultImageView)
         realSpoofTextView.text = "${realSpoofTextView.context.getString(R.string.real)}\t${detection.livenessScore}"
-
     }
 
 
@@ -88,9 +87,11 @@ internal class PhotoResultsActivity : Activity() {
         val frontDetection = processedCaptures[1] as ProcessedCapture.DocumentDetectionResult
         .RealDocument
         Glide.with(docFrontImageView).load(frontDetection.file).into(docFrontImageView)
-        val backDetection = processedCaptures[2] as ProcessedCapture.DocumentDetectionResult
-        .RealDocument
-        Glide.with(docBackImageView).load(backDetection.file).into(docBackImageView)
+        if(processedCaptures.size > 2){
+            val backDetection = processedCaptures[2] as ProcessedCapture.DocumentDetectionResult
+            .RealDocument
+            Glide.with(docBackImageView).load(backDetection.file).into(docBackImageView)
+        }
 
         var extractedDataMap: Map<String, String>? = null
 
