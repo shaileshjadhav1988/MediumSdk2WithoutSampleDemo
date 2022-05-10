@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:840247829444:android:bf8c306808bdeb5bd6ba91",
+        "mobilesdk_app_id": "1:840247829444:android:612d583a1befb22cd6ba91",
         "android_client_info": {
           "package_name": "com.idmission.sdk2.medium.sample"
         }

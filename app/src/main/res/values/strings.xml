@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sdk2SampleDemo</string>
+    <string name="app_name">MediumSdk2SampleDemo</string>
 
     <!-- Account Setup-->
     <string name="test_url">Template/Model URL</string>
