@@ -83,17 +83,17 @@ android {
 
 //Full SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-sdk:9.1.7.20'     
+     implementation 'com.idmission.sdk2:idmission-sdk:9.2.3.4'     
 }
 
 //Medium SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.1.7.20'     
+     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.2.3.4'     
 }
 
 //Lite SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-litesdk:9.1.7.20'     
+     implementation 'com.idmission.sdk2:idmission-litesdk:9.2.3.4'     
 }
 ```
 
@@ -201,6 +201,9 @@ You can find SDK documentation [here](https://demo-documentation.idmission.com/A
 * Enrollment with Biometrics
 * Customer Verification
 * ID Validation and face match
+
+##### v9.2.3.4
+* Bug fixes and performance improvements
 
 
 ```
