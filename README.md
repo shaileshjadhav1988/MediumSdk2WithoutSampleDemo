@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This guide introduces the IDentity iOS SDK within the IDmission product suite. Developers, project managers and QA testers should reference this guide for information on configuration and use of the IDentity SDK on the iOS platform. We recommend reviewing the entire implementation guide to fully understand the IDentity SDK functionality and its respective capabilities.
+This guide introduces the IDentity Android SDK within the IDmission product suite. Developers, project managers and QA testers should reference this guide for information on configuration and
+use of the IDentity SDK on the Android platform. We recommend reviewing the entire implementation guide to fully understand the IDentity SDK functionality and its respective capabilities.
 
 This guide details processes and procedures for embedding the IDentity SDK into your host application and utilizing its current features. For additional IDentity SDK support, please contact our Customer Support team at support@idmission.com.
 
@@ -32,7 +33,8 @@ The main features supported in this SDK are:
 - [Enrollment](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-andcustomer-enroll.html)<br/>
 - [Enrollment with Biometrics](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-enroll-biometrics.html)<br/>
 - [Customer Verification](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-verification.html)<br/>
-- [ID Validation and face match](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-and-match-face.html)<br/><br/>
+- [ID Validation and face match](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-and-match-face.html)<br/>
+- [Auto Fill](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/auto-fill.html)<br/><br/>
 
 Additional functions are also detailed in the [SDK Documentation](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html)
 
@@ -83,17 +85,17 @@ android {
 
 //Full SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-sdk:9.2.3.4'     
+     implementation 'com.idmission.sdk2:idmission-sdk:9.3.1.7'     
 }
 
 //Medium SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.2.3.4'     
+     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.3.1.7'     
 }
 
 //Lite SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-litesdk:9.2.3.4'     
+     implementation 'com.idmission.sdk2:idmission-litesdk:9.3.1.7'     
 }
 ```
 
@@ -122,9 +124,9 @@ class LaunchActivity : Activity() {
                         merchantID,
                         enableDebug,
                         enableGPS,
-                        uiCustomizationOptions = UiCustomizationOptions(
+                        sdkCustomizationOptions = SDKCustomizationOptions(
                             language = LANGUAGE
-                                .valueOf(language!!)
+                                .valueOf("EN")
                         ),
                     )
                 }
@@ -167,15 +169,105 @@ class LaunchActivity : Activity() {
 - [merchantId] - MerchantId provided by idmission.
 - [enableDebug] - (Boolean) If you want to enable debug options or not.
 - [enableGPS] - (Boolean) If you want to enable GPS options or not.
-- [uiCustomizationOptions] - UIcustomization options if you want to add your customized UI details.
+- [sdkCustomizationOptions] - SDKCustomizationOptions options if you want to add your customized
+  UI details.
 
 ##### Service Enroll Call
 
 - [UniqueNumber] - Unique Number required.
 
+#####  SDK UI Customization Options-
+- You can add your own customised ui details for ID and Face in Instruction, Capture and Retry
+  screen by adding SDKCustomizationOptions in initialization or service call. You can refer
+  below example:
+
+````
+
+    private fun getSdkCustomOptimization(): SDKCustomizationOptions {
+        return SDKCustomizationOptions(
+            language = LANGUAGE
+                .valueOf(language!!),
+            
+            
+            /* For Document related customizations */
+            idCaptureCustomizationOptions = IDCaptureCustomizationOptions(
+                enableIdInstructionScreen = true,
+                stringOptions = IDStringOptions(
+                    idInstructionText = "Custom Id Instruction Text",
+                    retryScreenLabelText = "Custom Document not found Text",
+                    captureScreenFrontIDLabel = "Custom scan front id text",
+                    /* more properties */
+                ),
+                layoutOptions = IDLayoutOptions(LabelGravity.CENTER),
+                colorOptions = IDColorOptions(
+                    captureBackgroundColor = "#1C2B48",
+                    captureLabelColor = "#FFFFFF",
+                    captureErrorLabelTextColor = "#1C2B48",
+                    captureErrorLabelBackgroundColor = "#FFFFFF",
+                    instructionScreenBackgroundColor = "#1C2B48",
+                    instructionScreenLabelTextColor = "#FFFFFF",
+                    instructionScreenButtonBackgroundColor = "#FFFFFF",
+                    instructionScreenButtonTextColor = "#000000",
+                    retryScreenBackgroundColor = "#1C2B48",
+                    retryScreenLabelTextColor = "#FFFFFF",
+                    retryScreenButtonTextColor = "#000000",
+                    retryScreenButtonBackgroundColor = "#FFFFFF",
+                    retryScreenImageTintColor = "#FFFFFF",
+                ),
+                fontOptions = IDFontOptions(
+                    labelFont = R.font.roboto_medium,
+                    labelFontSize = 14,
+                    labelPromptFontSize = 14,
+                    instructionScreenButtonFont = R.font.roboto_medium,
+                    instructionScreenLabelFont = R.font.roboto_medium,
+                    /* more properties */
+                )
+            ),
+
+            
+            /* For Selfie related customizations */
+            selfieCaptureCustomizationOptions = SelfieCaptureCustomizationOptions(
+                enableSelfieInstructionScreen = true,
+                stringOptions = SelfieStringOptions(
+                    selfieInstructionText = "Custom Selfie Instruction Text",
+                    retryScreenLabelText = "Custom selfie not found text",
+                    captureScreenLabel = "Custom scan your face text",
+                    /* more properties */
+                ),
+                layoutOptions = SelfieLayoutOptions(LabelGravity.CENTER),
+                colorOptions = SelfieColorOptions(
+                    captureBackgroundColor = "#1C2B48",
+                    captureLabelColor = "#FFFFFF",
+                    captureErrorLabelTextColor = "#1C2B48",
+                    captureErrorLabelBackgroundColor = "#FFFFFF",
+                    instructionScreenBackgroundColor = "#1C2B48",
+                    instructionScreenLabelTextColor = "#FFFFFF",
+                    instructionScreenButtonBackgroundColor = "#FFFFFF",
+                    instructionScreenButtonTextColor = "#000000",
+                    retryScreenBackgroundColor = "#1C2B48",
+                    retryScreenLabelTextColor = "#FFFFFF",
+                    retryScreenButtonTextColor = "#000000",
+                    retryScreenButtonBackgroundColor = "#FFFFFF",
+                    retryScreenImageTintColor = "#FFFFFF",
+                ),
+                fontOptions = SelfieFontOptions(
+                    labelFont = R.font.roboto_medium,
+                    labelFontSize = 14,
+                    labelPromptFontSize = 14,
+                    instructionScreenButtonFont = R.font.roboto_medium,
+                    instructionScreenLabelFont = R.font.roboto_medium
+                    /* more properties */
+
+                )
+            )
+        )
+    }
+
+
+````
 ## SDK documentation
 
-You can find SDK documentation [here](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html)
+You can find SDK documentation <a href="./-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html">here</a>
 
 ## SDK Flavours
 - Identity SDK
@@ -183,7 +275,8 @@ You can find SDK documentation [here](https://demo-documentation.idmission.com/A
 - IdentityLite SDK
 
 ## SDK Flavours Supported Features
-|  | Identity SDK | IdentityMedium SDK | IdentityLite SDK |
+
+|   | Identity SDK | IdentityMedium SDK | IdentityLite SDK |
 | :---: | :---: | :---: | :---: |
 | Document Detect | On Device | On Device |On Device|
 | Rotate, crop etc. | On Device | On Server |On Server|
@@ -196,14 +289,22 @@ You can find SDK documentation [here](https://demo-documentation.idmission.com/A
 | Detect hats and glasses | On Device | On Server |On Server|
 
 ## SDK Version History
+##### v9.3.1.7
+* Autofill.
+* Added SDK UI Customization.
+* Instruction screens for selfie and ID capture.
+* Bug fixes and performance improvements.
+
+##### v9.2.3.4
+* Bug fixes and performance improvements
+
 ##### v9.1.7.20
 * Enrollment
 * Enrollment with Biometrics
 * Customer Verification
 * ID Validation and face match
 
-##### v9.2.3.4
-* Bug fixes and performance improvements
+
 
 
 ```
