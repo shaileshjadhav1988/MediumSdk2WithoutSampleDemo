@@ -153,7 +153,7 @@ class LaunchActivity : Activity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {  
         data ?: return  
         if (requestCode != IdMissionCaptureLauncher.CAPTURE_REQUEST_CODE) return  
-        val processedCaptures = launcher.processResult(data)  
+        val processedCaptures = data.extras?.getParcelableArray(IdMissionCaptureLauncher.EXTRA_PROCESSED_CAPTURES)
         // do whatever you want with the data!  
     } 
 ```
