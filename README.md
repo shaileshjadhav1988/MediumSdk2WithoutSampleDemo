@@ -1,4 +1,4 @@
-# Module IDentity SDK
+# Module IDentity-SDK
 
 ## Introduction
 
@@ -21,22 +21,24 @@ SDK Flavours Download Links - As per your requirement you can downloads the belo
 [Download IDentityLiteSDK](https://github.com/Idmission-LLC/LiteSdk2SampleDemo) - Directly links to the IDentityLiteSDK Sample app on IDmission GitHub Repository
 <br/>
 
-[SDK Documentation](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html) - Directly links to the Identity Proofing SDK
+<a href="./-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html">SDK Documentation</a> - Directly links to the Identity Proofing SDK
 
 <br/>
 
 The main features supported in this SDK are:
 <br/>
-- [Live face Check](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/live-face-check.html)<br/>
-- [ID Validation](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation.html)<br/>
-- [ID Validation and face match](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-and-match-face.html)<br/>
-- [Enrollment](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-andcustomer-enroll.html)<br/>
-- [Enrollment with Biometrics](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-enroll-biometrics.html)<br/>
-- [Customer Verification](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-verification.html)<br/>
-- [ID Validation and face match](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-and-match-face.html)<br/>
-- [Auto Fill](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/auto-fill.html)<br/><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/live-face-check.html">Live face Check</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation.html">ID Validation</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-and-match-face.html">ID Validation and face match</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/id-validation-andcustomer-enroll.html">Enrollment</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-enroll-biometrics.html">Enrollment with Biometrics</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/customer-verification.html">Customer Verification</a><br/>
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/auto-fill.html">Auto Fill</a><br/><br/>
 
-Additional functions are also detailed in the [SDK Documentation](https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html)
+Additional supported features
+* <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/document-capture.html">Document Capture</a><br/><br/>
+
+Additional functions are also detailed in the <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html">SDK Documentation</a>
 
 
 <br/>
@@ -85,17 +87,17 @@ android {
 
 //Full SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-sdk:9.3.1.7'     
+     implementation 'com.idmission.sdk2:idmission-sdk:9.3.4.2.8'     
 }
 
 //Medium SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.3.1.7'     
+     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.3.4.2.8'     
 }
 
 //Lite SDK
 dependencies {  
-     implementation 'com.idmission.sdk2:idmission-litesdk:9.3.1.7'     
+     implementation 'com.idmission.sdk2:idmission-litesdk:9.3.4.2.8'     
 }
 ```
 
@@ -193,17 +195,43 @@ class LaunchActivity : Activity() {
             idCaptureCustomizationOptions = IDCaptureCustomizationOptions(
                 enableIdInstructionScreen = true,
                 stringOptions = IDStringOptions(
-                    idInstructionText = "Custom Id Instruction Text",
-                    retryScreenLabelText = "Custom Document not found Text",
-                    captureScreenFrontIDLabel = "Custom scan front id text",
-                    /* more properties */
+                    captureScreenFrontIDLabel = "Scan the Front of your ID",
+                    captureScreenBackIDLabel = "SCAN the Back of your ID",
+                    captureScreenBarcodeLabel ="Scan the Barcode on the Back of your ID ",
+                    captureScreenDocumentCaptureLabel = "Frame Your Document.",
+                    captureScreenError = "Sorry, we can\'t seem to find a face and/or required text on this ID.",
+                    captureScreenBarcodeError = "Sorry, we can\'t seem to detect the barcode in this image.",
+                    moveCloser = "Move ID Closer",
+                    moveAway = "Move ID Away",
+                    alignRectangle = "Align Document Inside Rectangle",
+                    useFront = "Use Front of ID",
+                    useBack = "Use Back of ID",
+                    makeSurePhotoTextVisible = "Make sure all text on the ID is completely visible.",
+                    scanBarcode = "Scan Barcode",
+                    makeSureBarcodeVisible = "Make sure the barcode on the ID is completely visible.",
+                    frontBackMismatch = "ID Front and Back Do Not Match",
+                    flipToBack = "Flip to Capture ID Back",
+                    tooMuchGlare = "Too much light,\n move document away from direct light",
+                    tooMuchDark = "It\'s too dark to take a good image. Find a place with better lighting.",
+                    retryScreenLabelText = "Real ID not detected. Please try again.",
+                    retryButtonText = "Retry",
+                    cancelButtonText = "Cancel",
+                    idInstructionText = "Scan ID",
+                    documentInstructionText = "Scan ID",
+                    cancelText = "Cancel"
+                    
                 ),
-                layoutOptions = IDLayoutOptions(LabelGravity.CENTER),
+                layoutOptions = IDLayoutOptions(
+                captureLabelGravity = LabelGravity.CENTER,
+                topBarCancelButtonGravity = CancelButtonGravity.START),
                 colorOptions = IDColorOptions(
                     captureBackgroundColor = "#1C2B48",
                     captureLabelColor = "#FFFFFF",
+                    captureSuccessLabelTextColor = "#FFFFFF",
+                    
                     captureErrorLabelTextColor = "#1C2B48",
                     captureErrorLabelBackgroundColor = "#FFFFFF",
+                    captureErrorLabelBackgroundColor = "#FFFFFF"
                     instructionScreenBackgroundColor = "#1C2B48",
                     instructionScreenLabelTextColor = "#FFFFFF",
                     instructionScreenButtonBackgroundColor = "#FFFFFF",
@@ -213,6 +241,8 @@ class LaunchActivity : Activity() {
                     retryScreenButtonTextColor = "#000000",
                     retryScreenButtonBackgroundColor = "#FFFFFF",
                     retryScreenImageTintColor = "#FFFFFF",
+                    topBarBackgroundColor = "#FFFFFF",
+                    topBarTitleTextColor = "#000000"
                 ),
                 fontOptions = IDFontOptions(
                     labelFont = R.font.roboto_medium,
@@ -220,7 +250,8 @@ class LaunchActivity : Activity() {
                     labelPromptFontSize = 14,
                     instructionScreenButtonFont = R.font.roboto_medium,
                     instructionScreenLabelFont = R.font.roboto_medium,
-                    /* more properties */
+                    retryScreenLabelFont = R.font.roboto_medium,
+                    retryScreenButtonFont = R.font.roboto_medium
                 )
             ),
 
@@ -229,17 +260,50 @@ class LaunchActivity : Activity() {
             selfieCaptureCustomizationOptions = SelfieCaptureCustomizationOptions(
                 enableSelfieInstructionScreen = true,
                 stringOptions = SelfieStringOptions(
-                    selfieInstructionText = "Custom Selfie Instruction Text",
-                    retryScreenLabelText = "Custom selfie not found text",
-                    captureScreenLabel = "Custom scan your face text",
-                    /* more properties */
+                
+                 captureScreenLabel = "Frame your face inside the oval.",
+                captureScreenError = "Sorry, we can\'t seem to detect a face.",
+                moveCloser = "Move Closer",
+                moveAway = "Move Further",
+                alignInsideOval = "Align Face Inside Oval",
+                capturingFace = "Capturing Face",
+                realFace = "Real Face",
+                leftEyeClosed = "Left Eye Closed",
+                rightEyeClosed = "Right Eye Closed",
+                faceMaskDetected = "Face Mask Detected",
+                tooMuchLight = "Excessive backlighting detected. Please reduce backlighting to proceed.",
+                tooDark = "Excessive darkness detected. Please reduce darkness to proceed.",
+                straightenHead = "Tilt head upright",
+                eyesClosed = "Keep eyes open",
+                moveFaceDown = "Move Face Down",
+                moveFaceUp = "Move Face Up",
+                glassesDetected = "Remove Glasses",
+                hatDetected = "Hat detected",
+                scarfDetected = "Scarf Detected",
+                scarfHatDetected = "Scarf and Hat detected",
+                glassesHatDetected = "Glasses and Hat detected",
+                scarfGlassesDetected = "Scarf and Glasses detected",
+                maskDetected = "Mask detected",
+                maskHatDetected = "Mask and Hat detected",
+                scarfMaskDetected = "Scarf and Mask detected",
+                maskGlassesDetected = "Mask and Glasses detected",
+                fakeFace = "Fake Face",
+                retryScreenLabelText = "Live face not detected. Please try again.",
+                retryButtonText = "Retry",
+                cancelButtonText = "Cancel",
+                selfieInstructionText = "Scan selfie",
+                cancelText = "Cancel",
                 ),
-                layoutOptions = SelfieLayoutOptions(LabelGravity.CENTER),
+                layoutOptions = SelfieLayoutOptions(
+                captureLabelGravity = LabelGravity.CENTER,
+                topBarCancelButtonGravity = CancelButtonGravity.START),
                 colorOptions = SelfieColorOptions(
                     captureBackgroundColor = "#1C2B48",
                     captureLabelColor = "#FFFFFF",
+                    captureSuccessLabelTextColor = "#FFFFFF"
                     captureErrorLabelTextColor = "#1C2B48",
                     captureErrorLabelBackgroundColor = "#FFFFFF",
+                    captureErrorLabelBackgroundColor = "#FFFFFF"
                     instructionScreenBackgroundColor = "#1C2B48",
                     instructionScreenLabelTextColor = "#FFFFFF",
                     instructionScreenButtonBackgroundColor = "#FFFFFF",
@@ -249,14 +313,17 @@ class LaunchActivity : Activity() {
                     retryScreenButtonTextColor = "#000000",
                     retryScreenButtonBackgroundColor = "#FFFFFF",
                     retryScreenImageTintColor = "#FFFFFF",
+                    topBarBackgroundColor = "#FFFFFF",
+                    topBarTitleTextColor = "#000000",
                 ),
                 fontOptions = SelfieFontOptions(
                     labelFont = R.font.roboto_medium,
                     labelFontSize = 14,
                     labelPromptFontSize = 14,
                     instructionScreenButtonFont = R.font.roboto_medium,
-                    instructionScreenLabelFont = R.font.roboto_medium
-                    /* more properties */
+                    instructionScreenLabelFont = R.font.roboto_medium,
+                    retryScreenLabelFont = R.font.roboto_medium,
+                    retryScreenButtonFont = R.font.roboto_medium
 
                 )
             )
@@ -267,7 +334,7 @@ class LaunchActivity : Activity() {
 ````
 ## SDK documentation
 
-You can find SDK documentation <a href="./-i-dentity%20-s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html">here</a>
+You can find SDK documentation <a href="https://demo-documentation.idmission.com/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/index.html">here</a>
 
 ## SDK Flavours
 - Identity SDK
@@ -278,6 +345,7 @@ You can find SDK documentation <a href="./-i-dentity%20-s-d-k/com.idmission.sdk2
 
 |   | Identity SDK | IdentityMedium SDK | IdentityLite SDK |
 | :---: | :---: | :---: | :---: |
+|   | <B>Identity SDK | <B>IdentityMedium SDK | <B>IdentityLite SDK |
 | Document Detect | On Device | On Device |On Device|
 | Rotate, crop etc. | On Device | On Server |On Server|
 | Document Realness | On Device | On Server |On Server|
@@ -289,6 +357,13 @@ You can find SDK documentation <a href="./-i-dentity%20-s-d-k/com.idmission.sdk2
 | Detect hats and glasses | On Device | On Server |On Server|
 
 ## SDK Version History
+##### v9.3.4.2.8
+* Additional document upload and capture feature.
+* Added customization of overlay images while capturing ID and selfie.
+* Added focus model for better image capture.
+* Bug fixes and performance improvements.
+
+
 ##### v9.3.1.7
 * Autofill.
 * Added SDK UI Customization.
