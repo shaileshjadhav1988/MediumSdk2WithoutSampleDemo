@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
             showProgress();
             CoroutineScope(Dispatchers.Main).launch {
                 withContext(Dispatchers.IO) {
+//                    throw RuntimeException("Test Crash") // Force a crash
+
                     response = IdentityProofingSDK.initialize(
                         this@MainActivity,
                         edtUrl.text.toString(),
