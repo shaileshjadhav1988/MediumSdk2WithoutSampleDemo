@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.idmission.sdk2.R
-import com.idmission.sdk2.capture.analysis.FaceMatch
+import com.idmission.sdk2.capture.analysis.helpers.FaceMatch
 import com.idmission.sdk2.capture.presentation.camera.helpers.ProcessedCapture
 
 

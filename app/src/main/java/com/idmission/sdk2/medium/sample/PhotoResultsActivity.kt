@@ -1,6 +1,4 @@
 package com.idmission.sdk2.medium.sample
-
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
 import com.idmission.sdk2.R
 import com.idmission.sdk2.capture.IdMissionCaptureLauncher
@@ -78,19 +77,26 @@ internal class PhotoResultsActivity : Activity() {
 
     private fun showFaceImages(processedCaptures: List<ProcessedCapture>) {
         val detection = processedCaptures[0] as ProcessedCapture.LiveFaceDetectionResult.RealFace
-        Glide.with(photoResultImageView).load(detection.file).into(photoResultImageView)
+        Glide.with(photoResultImageView).load(detection.file)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true).into(photoResultImageView)
         realSpoofTextView.text = "${realSpoofTextView.context.getString(R.string.real)}\t${detection.livenessScore}"
+
     }
 
 
     private fun showDocumentImages(processedCaptures: List<ProcessedCapture>) {
         val frontDetection = processedCaptures[1] as ProcessedCapture.DocumentDetectionResult
         .RealDocument
-        Glide.with(docFrontImageView).load(frontDetection.file).into(docFrontImageView)
+        Glide.with(docFrontImageView).load(frontDetection.file)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true).into(docFrontImageView)
         if(processedCaptures.size > 2){
             val backDetection = processedCaptures[2] as ProcessedCapture.DocumentDetectionResult
             .RealDocument
-            Glide.with(docBackImageView).load(backDetection.file).into(docBackImageView)
+            Glide.with(docBackImageView).load(backDetection.file)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).into(docBackImageView)
         }
 
         var extractedDataMap: Map<String, String>? = null
@@ -251,13 +257,17 @@ internal class PhotoResultsActivity : Activity() {
 
         if (!response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage.isNullOrEmpty()){
             rl_live_result.visibility = View.VISIBLE
-            Glide.with(live_image).load(response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage).into(live_image)
+            Glide.with(live_image).load(response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).into(live_image)
         }else{
             live_image.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront.isNullOrEmpty()){
             ll_doc_image.visibility = View.VISIBLE
-            Glide.with(iv_doc_image).load(response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront).into(iv_doc_image)
+            Glide.with(iv_doc_image).load(response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).into(iv_doc_image)
         }else{
             iv_doc_image.visibility = View.GONE
         }
@@ -286,7 +296,7 @@ internal class PhotoResultsActivity : Activity() {
             }
 
         }
-        }
+    }
 
     private fun setHostResult(result: Triple<Boolean, String, Int>, resultTextView: TextView) {
         if(result.first) {

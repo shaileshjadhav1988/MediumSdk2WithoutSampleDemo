@@ -9,8 +9,8 @@ import com.idmission.sdk2.R
 import com.idmission.sdk2.client.model.InitializeResponse
 import com.idmission.sdk2.client.model.Response
 import com.idmission.sdk2.client.model.SDKCustomizationOptions
-import com.idmission.sdk2.client.model.UiCustomizationOptions
 import com.idmission.sdk2.identityproofing.IdentityProofingSDK
+import com.idmission.sdk2.sample.tokenapi.LoginTokenApiHandler
 import com.idmission.sdk2.utils.LANGUAGE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +18,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
-    var initializeApiBaseUrl = "https://demo.idmission.com/"
     var apiBaseUrl = "https://apidemo.idmission.com/"
     //TODO update your loginID, password, MerchantID and productID
-    var loginID = ""
-    var password = ""
-    var merchantID: Long = 0
-    var productID = 0
+    var loginID = "ev_integ_40123"
+    var password = "HWTe#23815$"
+    var merchantID: Long = 19592
+    var productID = 4130
+    var clientSecret = "RSvepzAb73T9gyP4vZXTTGkt3BEM1slf"
+    var clientID = "40123"
     var productName = "Identity_Validation_and_Face_Matching"
     var lang = "EN"
     var isSDKinit = false
@@ -32,41 +33,50 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val edtUrl=findViewById<EditText>(R.id.edit_text_url)
-            edtUrl.setText(initializeApiBaseUrl)
         val edApiUrl = findViewById<EditText>(R.id.edit_api_text_url)
         edApiUrl.setText(apiBaseUrl)
-        val edtLogin=findViewById<EditText>(R.id. edit_text_login_id)
-            edtLogin.setText(loginID)
-        val edtPassword=findViewById<EditText>(R.id.edit_text_password)
-            edtPassword.setText(password)
-        val edtMerchantId=findViewById<EditText>(R.id.edit_text_merchant_id)
-            edtMerchantId.setText(merchantID.toString(), TextView.BufferType.EDITABLE)
-        /*val debugSwitch = findViewById<SwitchCompat>(R.id.switch_btn_debug)
-        val gpsSwitch = findViewById<SwitchCompat>(R.id.switch_btn_gps)*/
+        val edtLogin = findViewById<EditText>(R.id. edit_text_login_id)
+        edtLogin.setText(loginID)
+        val edtPassword = findViewById<EditText>(R.id.edit_text_password)
+        edtPassword.setText(password)
+        val edtMerchantId = findViewById<EditText>(R.id.edit_text_merchant_id)
+        edtMerchantId.setText(merchantID.toString(), TextView.BufferType.EDITABLE)
+
+        val edtClientSecret = findViewById<EditText>(R.id.edit_text_client_secret)
+        edtClientSecret.setText(clientSecret)
+
+        val edtClientId = findViewById<EditText>(R.id.edit_text_client_id)
+        edtClientId.setText(""+clientID)
 
         findViewById<Button>(R.id.button_continue).setOnClickListener(View.OnClickListener {
             var response: Response<InitializeResponse>
             showProgress();
             CoroutineScope(Dispatchers.Main).launch {
                 withContext(Dispatchers.IO) {
-//                    throw RuntimeException("Test Crash") // Force a crash
+
+                    var accessTokenInfo = LoginTokenApiHandler.getLoginAccessTokenRequest(
+                        clientId = findViewById<EditText>(R.id.edit_text_client_id).text.toString(),
+                        userId = findViewById<EditText>(R.id.edit_text_login_id).text.toString(),
+                        password = findViewById<EditText>(R.id.edit_text_password).text.toString(),
+                        clientSecret = findViewById<EditText>(R.id.edit_text_client_secret).text.toString(),
+                        tokenCreateEnvironment = if(findViewById<EditText>(R.id.edit_api_text_url).text.toString().contains("demo")) "DEMO"
+                        else if(findViewById<EditText>(R.id.edit_api_text_url).text.toString().contains("uat"))
+                            "UAT" else "KYC"
+                    )
 
                     response = IdentityProofingSDK.initialize(
                         this@MainActivity,
-                        edtUrl.text.toString(),
                         edApiUrl.text.toString(),
-                        edtLogin.text.toString(),
-                        edtPassword.text.toString(),
-                        edtMerchantId.text.toString().toLong(),
                         sdkCustomizationOptions = SDKCustomizationOptions(LANGUAGE.valueOf(lang)),
-                        enableDebug = false)
+                        enableDebug = false,
+                        isUpdateModelsData = true,
+                        accessToken = accessTokenInfo?.access_token)
 
                 }
-                isSDKinit = response.result?.employeeInterface?.loginRS?.statusData?.statusCode?.equals(0) == true
+                isSDKinit = response.result?.status?.statusCode?.equals("000") == true
             }.invokeOnCompletion {
                 if(isSDKinit){
-                    startActivity(Intent(this,ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    startActivity(Intent(this, ServiceCallActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                 }else{
                     Toast.makeText(this@MainActivity,"Error: SDK initialization credentials are not correct",Toast.LENGTH_SHORT).show()
                 }
@@ -78,11 +88,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showProgress() {
         findViewById<ProgressBar>(R.id.indeterminateBar).visibility=View.VISIBLE
-        //findViewById<LinearLayout>(R.id.ll_main).visibility = View.GONE
     }
 
     private fun hideProgress() {
-        findViewById<ProgressBar>(R.id.indeterminateBar).visibility=View.GONE
-       // findViewById<LinearLayout>(R.id.ll_main).visibility = View.VISIBLE
+        findViewById<ProgressBar>(R.id.indeterminateBar).visibility = View.GONE
     }
 }

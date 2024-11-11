@@ -20,40 +20,6 @@
             android:layout_marginRight="20dp">
 
             <EditText
-                android:id="@+id/edit_text_url"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/edit_box_style"
-                android:imeOptions="actionNext"
-                android:inputType="textMultiLine"
-                android:paddingLeft="5dp"
-                android:paddingTop="6dp"
-                android:text="https://demo.idmission.com/IDS/service/integ/idm/thirdparty/upsert"
-                android:textColor="@color/black"
-                android:textSize="@dimen/initialization_param_text_size" />
-
-            <TextView
-                android:id="@+id/text_view_url"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/background"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="@color/black"
-                android:text="@string/test_url" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp">
-
-            <EditText
                 android:id="@+id/edit_api_text_url"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -161,7 +127,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="7dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1">
 
                 <EditText
@@ -188,6 +154,8 @@
                     android:textColor="@color/black"
                     android:text="@string/merchant_id" />
             </RelativeLayout>
+
+
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -427,6 +395,78 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_27"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="7dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edit_text_client_secret"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edit_box_style"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/initialization_param_text_size" />
+
+                <TextView
+                    android:id="@+id/text_view_client_secret"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/black"
+                    android:text="@string/client_secret" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/edit_text_client_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edit_box_style"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/initialization_param_text_size" />
+
+                <TextView
+                    android:id="@+id/text_view_client_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/black"
+                    android:text="@string/client_id" />
+            </RelativeLayout>
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linear_layout"

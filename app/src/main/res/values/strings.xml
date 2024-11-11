@@ -42,5 +42,9 @@
     <string name="watch_list">Watch List</string>
     <string name="pep">Pep</string>
     <string name="aml_kyc_result">AML and KYC result</string>
-    <string name="dmv_result">DMV resut</string>
+    <string name="dmv_result">DMV result</string>
+
+
+    <string name="client_secret">Client Secret</string>
+    <string name="client_id">Client ID</string>
 </resources>

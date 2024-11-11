@@ -60,133 +60,238 @@ The main features supported in this SDK are:
   Auto Fill</a><br/>
 * <a href="https://documentation.idmission.com/identity/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/video-id.html">
   Video ID</a><br/><br/>
+## SDK Server API call
+* <a href="https://documentation.idmission.com/identity/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/initialize.html">
+  Initialize SDK</a><br/>
+* <a href="https://documentation.idmission.com/identity/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/final-submit.html">
+  Final Submit</a><br/><br/>
 
 ## Getting Started
 
-1. Please contact to sales@idmission.com for Login Credentials, which you will later pass to the
-   SDK.
+### 1. Please contact to sales@idmission.com for Login Credentials, which you will later pass to the SDK.
 
-2. Go to your **project-level** build.gradle file, and add the following in the
+### 2.1. (Groovy) Go to your **project-level** build.gradle file, and add the following in the
 
-```
-allprojects {  
-    repositories {  
-        google()  
-        jcenter()  
-        // important stuff below  
-        maven {
-            url "https://gitlab.idmission.com/api/v4/projects/220/packages/maven"
-            name "GitLab"
-            credentials(HttpHeaderCredentials) {
-                name = "Private-Token"
-                value = "WESesyuSD9fQeqNEyig6"
-            }
-            authentication {
-                header(HttpHeaderAuthentication)
-            }
-        }
-        //Required for fingerprint capture
-        maven { url 'https://jitpack.io' }
-    }  
-}
-```
-
-3. In your **app-level** build.gradle file, add the following:
-
-```
-android {  
-    // Java 8 is required for CameraX  
-    compileOptions {  
-        sourceCompatibility JavaVersion.VERSION_1_8  
-        targetCompatibility JavaVersion.VERSION_1_8  
-    }  
-    kotlinOptions {  
-        jvmTarget = '1.8'  
-    }  
-}
-
-//IdentityFull SDK
-dependencies {  
-     implementation 'com.idmission.sdk2:idmission-sdk:9.5.9.2.05'     
-}
-
-//IdentityMedium SDK
-dependencies {  
-     implementation 'com.idmission.sdk2:idmission-mediumsdk:9.5.9.2.05'     
-}
-
-//IdentityLite SDK
-dependencies {  
-     implementation 'com.idmission.sdk2:idmission-litesdk:9.5.9.2.05'     
-}
-
-//IdentityVideoID SDK
-dependencies {  
-     implementation 'com.idmission.sdk2:idmission-videoidsdk:9.5.9.2.05'     
-}
-```
-
-4. Sync your project with Gradle
-5. You may now use the library. Example usage below:
-
-```
-class LaunchActivity : Activity() {    
-
-    private val launcher = IdMissionCaptureLauncher()    
-     var initializeApiBaseUrl = "https://kyc.idmission.com/"
-     var apiBaseUrl = "https://api.idmission.com/"
-    
-    override fun onCreate(savedInstanceState: Bundle?) {  
-        super.onCreate(savedInstanceState)  
-        setContentView(R.layout.activity_launch)
-        
-        //SDk initialize call
-        init_button.setOnClickListener{
-            CoroutineScope(Dispatchers.Main).launch {
-                var response: Response<InitializeResponse>
-                withContext(Dispatchers.IO) {
-                    response = IdentityProofingSDK.initialize(
-                        applicationContext,
-                        initializeApiBaseUrl = initializeApiBaseUrl, 
-                        apiBaseUrl = apiBaseUrl, 
-                        loginID,
-                        password,
-                        merchantID,
-                        enableDebug,
-                        enableGPS,
-                        sdkCustomizationOptions = SDKCustomizationOptions(
-                            language = LANGUAGE
-                                .valueOf("EN")
-                        ),
-                    )
+    ```
+    allprojects {  
+        repositories {  
+            google()  
+            jcenter()  
+            // important stuff below  
+            maven {
+                url "https://gitlab.idmission.com/api/v4/projects/220/packages/maven"
+                name "GitLab"
+                credentials(HttpHeaderCredentials) {
+                    name = "Private-Token"
+                    value = "WESesyuSD9fQeqNEyig6"
                 }
-        }
-        
-    //Call Enroll Service 
-        someButton.setOnClickListener {
-            IdentityProofingSDK.idValidationAndcustomerEnroll(
-                this,
-                uniqueNumber = uniqueNumber.text.toString()) 
-        }  
-        
-        // finalSubmit call for submit data to the server
-        submitDataButton.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                IdentityProofingSDK.finalSubmit(
-                    applicationContext
-                )
+                authentication {
+                    header(HttpHeaderAuthentication)
+                }
             }
+            //Required for fingerprint capture
+            maven { url 'https://jitpack.io' }
         }  
-     
+    }
+    ```
+### 2.2. (Kotlin DSL) Go to your **project-level** settings.gradle.kts file, and add the following in the
 
-    // capture result is received in onActivityResult    
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {  
-        data ?: return  
-        if (requestCode != IdMissionCaptureLauncher.CAPTURE_REQUEST_CODE) return  
-        val processedCaptures = data.extras?.getParcelableArray(IdMissionCaptureLauncher.EXTRA_PROCESSED_CAPTURES)
-        // do whatever you want with the data!  
-    } 
 ```
+   pluginManagement {
+        repositories {
+            google()
+            mavenCentral()
+            gradlePluginPortal()
+        }
+    }
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+            // important stuff below 
+            maven {
+                url = uri("https://gitlab.idmission.com/api/v4/projects/220/packages/maven")
+                name = "GitLab"
+                credentials(HttpHeaderCredentials::class) {
+                    name = "Private-Token"
+                    value = "WESesyuSD9fQeqNEyig6"
+                }
+                authentication {
+                    create<HttpHeaderAuthentication>("header")
+                }
+            }
+            //Required for fingerprint capture
+            maven {
+                 url = uri("https://jitpack.io")
+            }
+        }
+    } 
+    rootProject.name = "AndroidSDKWithKTS"
+    include(":app")
+
+```
+
+
+### 3. In your **app-level** build.gradle file, add the following:
+
+    ```
+    android {  
+        // Java 8 is required for CameraX  
+        compileOptions {  
+            sourceCompatibility JavaVersion.VERSION_1_8  
+            targetCompatibility JavaVersion.VERSION_1_8  
+        }  
+        kotlinOptions {  
+            jvmTarget = '1.8'  
+        }  
+    }
+    
+    //IdentityFull SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-sdk:9.6.22.2.12'     
+    }
+    
+    //IdentityMedium SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.22.2.12'     
+    }
+    
+    //IdentityLite SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.22.2.12'     
+    }
+    
+    //IdentityVideoID SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.22.2.12'     
+    }
+    ```
+
+### 4. Sync your project with Gradle
+### 5. Generate Access Token :
+### Login Credentials required for token generation.
+The following details are required to generate a token:
+
+    * Auth_url : Authentication url for the given environment
+
+    * client_id : Client ID generated for the specific company
+
+    * client_secret : Client credentials/secret generated for the specific company
+
+    * Username : Integ user name
+
+    * Password: Password of the Integ user
+
+All company login details needed are provided upon sign up on the Identity Portal.
+
+### Token Generation using RESTful API
+Token Generation Sample Request:
+```
+         curl --location --request POST 'https://auth.idmission.com/auth/realms/identity/protocol/openid-connect/token' \
+         --header 'Content-Type: application/x-www-form-urlencoded' \
+         --data-urlencode 'grant_type=password' \
+         --data-urlencode 'client_id=XXXXXXX' \
+         --data-urlencode 'client_secret=XXXXXXXX' \
+         --data-urlencode 'username=XXXXXXXX' \
+         --data-urlencode 'password=XXXXXXXXX' \
+         --data-urlencode 'scope=api_access'
+```
+
+Sample Response - Token Generation:
+```
+     {
+        "access_token": "eyJhbGciO....5gNZx03Myb8ZuyY2gu3u-8KgGmULBs9mkPcg",
+        "expires_in": 18000,
+        "refresh_expires_in": 0,
+        "token_type": "Bearer",
+        "session_state": "e0b689e8-e7c6-47b7-bf9d-1349ea813c96",
+        "scope": "email profile api_access"
+     }
+```
+The following details are the response parameters
+
+    * access_token : Access Token value
+
+    * expires_in : Access token expires time in seconds
+
+    * refresh_expires_in : Refresh access token expires time in seconds
+
+    * token_type : Token type
+
+    * session_state : session state value
+
+    * scope : Token scope
+
+### 6.  SDK Initialization API.
+* <a href="https://documentation.idmission.com/identity/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/initialize.html">
+  Initialize SDK</a><br/>
+```
+     IdentityProofingSDK.initialize(
+     activity,
+     apiBaseUrl = apiBaseUrl,
+     sdkCustomizationOptions = SDKCustomizationOptions(language = "EN"),
+     enableDebug = false,
+     accessToken = accessTokenValue)
+```
+
+### 7. You may now use the library. Example usage below:
+        ```
+        class LaunchActivity : Activity() {    
+        
+            private val launcher = IdMissionCaptureLauncher()    
+             var apiBaseUrl = "https://api.idmission.com/"
+            
+            override fun onCreate(savedInstanceState: Bundle?) {  
+                super.onCreate(savedInstanceState)  
+                setContentView(R.layout.activity_launch)
+                
+                //SDK initialize call
+                init_button.setOnClickListener{
+                    CoroutineScope(Dispatchers.Main).launch {
+                        var response: Response<InitializeResponse>
+                        withContext(Dispatchers.IO) {
+                            // Generate a token as described in the 'Generate Access Token' section.
+                            response = IdentityProofingSDK.initialize(
+                                applicationContext, 
+                                apiBaseUrl = apiBaseUrl, 
+                                enableDebug = enableDebug,
+                                enableGPS = enableGPS,
+                                sdkCustomizationOptions = SDKCustomizationOptions(
+                                    language = LANGUAGE
+                                        .valueOf("EN")
+                                ),
+                                accessToken = accessTokenValue,
+                            )
+                        }
+                }
+                
+            //Call Enroll Service 
+                someButton.setOnClickListener {
+                    IdentityProofingSDK.idValidationAndcustomerEnroll(
+                        this,
+                        uniqueNumber = uniqueNumber.text.toString()) 
+                }  
+                
+                // finalSubmit call for submit data to the server
+                submitDataButton.setOnClickListener {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        IdentityProofingSDK.finalSubmit(
+                            applicationContext
+                        )
+                    }
+                }  
+             
+        
+            // capture result is received in onActivityResult    
+            override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {  
+                data ?: return  
+                if (requestCode != IdMissionCaptureLauncher.CAPTURE_REQUEST_CODE) return  
+                val processedCaptures = data.extras?.getParcelableArray(IdMissionCaptureLauncher.EXTRA_PROCESSED_CAPTURES)
+                // do whatever you want with the data!  
+            } 
+        ```
+
 
 Additional supported features
 
@@ -634,6 +739,47 @@ here</a>
 |        Video ID         |       N/A       |          N/A          |         N/A         |       On Device        |
 
 ## SDK Version History
+#### v9.6.22.2.12 (November 2024)
+* Integrated the latest swagger V4 API version. This includes updates to model download based on
+  V4, updates to the new initialization process, as well as ensuring backward compatibility.
+* Added the selfie image in the response.
+* Added support for an initialization parameter that will enable / disable Location / GPS capture.
+* Improved ID capture guidance messages to inform the user to hold still once the document is
+  detected to ensure a higher quality capture.
+* Added configuration support to allow selfie capture with the back camera.
+* Added support for additional date and timestamp capture as Exif for ID capture and Selfie
+  capture image.
+* QR code for the test applications supports the new initialization process.
+* Update to support multiple security enhancements including the removal of outdated/unused
+  libraries.
+* Enhanced API 34 Support in Android
+* Bug fixes and performance improvements.
+* Updated all default AI models to the latest versions.
+
+##### v9.6.4.2.07 (February 2024)
+* Reduce response callback time for SDK Initialization Method.
+* Use the doc-detect model to determine document is ID or Passport.
+* Updated all default AI models to the latest versions.
+
+##### v9.6.3.2.04 (January 2024)
+* Updated SDK support for additional flags (sendProcessedImagesInResponse
+  and sendInputImagesInResponse)
+* Added ID extracted profession and profession non English data in response
+* Updated all default AI models to the latest versions.
+
+##### v9.5.18.2.03 (December 2023)
+* Changed default app_name key to sdk_app_name.
+* Updated all default AI models to the latest versions.
+*
+##### v9.5.15.2.09 (November 2023)
+* Enhanced Android SDK to support a new feature for voice capture.
+* Enhanced Android SDK to support a new face focus model for improved quality at the time of capture.
+* Updated the Android SDK to ensure the user is not prompted for file storage permission for ID capture as no images are stored on the device.
+* Updated the Android SDK with new Spanish translations for server response status messages.
+* Updated the base URLs used in Android SDK for initialization to ensure they are consistent.
+* Updated fingerprint feature libraries to be consistent with SDK 1.0
+* Updated all default AI models to the latest versions.
+
 ##### v9.5.9.2.05
 * UI Changes and bug Fixes for Passport NFC detection
 * Removed Firebase Analytics
@@ -699,5 +845,3 @@ here</a>
 * Enrollment with Biometrics
 * Customer Verification
 * ID Validation and face match
-
-```
