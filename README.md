@@ -170,6 +170,7 @@ The main features supported in this SDK are:
 
 ### 4. Sync your project with Gradle
 ### 5. Generate Access Token :
+<b>Tokens are to be obtained on your server and sent to the client in the initialize call.</b>
 ### Login Credentials required for token generation.
 The following details are required to generate a token:
 
@@ -226,6 +227,7 @@ The following details are the response parameters
 ### 6.  SDK Initialization API.
 * <a href="https://documentation.idmission.com/identity/Android-SDK-2/-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-identity-proofing-s-d-k/initialize.html">
   Initialize SDK</a><br/>
+<b>Token obtained from server needs to be passed in initialize call as below</b>
 ```
      IdentityProofingSDK.initialize(
      activity,
