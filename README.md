@@ -149,22 +149,22 @@ The main features supported in this SDK are:
     
     //IdentityFull SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-sdk:9.6.22.2.12'     
+         implementation 'com.idmission.sdk2:idmission-sdk:9.6.22.2.13'     
     }
     
     //IdentityMedium SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.22.2.12'     
+         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.22.2.13'     
     }
     
     //IdentityLite SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.22.2.12'     
+         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.22.2.13'     
     }
     
     //IdentityVideoID SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.22.2.12'     
+         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.22.2.13'     
     }
     ```
 
@@ -741,7 +741,7 @@ here</a>
 |        Video ID         |       N/A       |          N/A          |         N/A         |       On Device        |
 
 ## SDK Version History
-#### v9.6.22.2.12 (November 2024)
+#### v9.6.22.2.13 (November 2024)
 * Integrated the latest swagger V4 API version. This includes updates to model download based on
   V4, updates to the new initialization process, as well as ensuring backward compatibility.
 * Added the selfie image in the response.
