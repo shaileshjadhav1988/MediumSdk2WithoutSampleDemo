@@ -149,22 +149,22 @@ The main features supported in this SDK are:
     
     //IdentityFull SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-sdk:9.6.22.2.13'     
+         implementation 'com.idmission.sdk2:idmission-sdk:9.6.24.2.15'     
     }
     
     //IdentityMedium SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.22.2.13'     
+         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.24.2.15'     
     }
     
     //IdentityLite SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.22.2.13'     
+         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.24.2.15'     
     }
     
     //IdentityVideoID SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.22.2.13'     
+         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.24.2.15'     
     }
     ```
 
@@ -741,6 +741,9 @@ here</a>
 |        Video ID         |       N/A       |          N/A          |         N/A         |       On Device        |
 
 ## SDK Version History
+#### v9.6.24.2.15 (03rd December 2024)
+* Improved capture quality with model updates that notify users of obstructions over key ID information.
+
 #### v9.6.22.2.13 (November 2024)
 * Integrated the latest swagger V4 API version. This includes updates to model download based on
   V4, updates to the new initialization process, as well as ensuring backward compatibility.
@@ -772,7 +775,7 @@ here</a>
 ##### v9.5.18.2.03 (December 2023)
 * Changed default app_name key to sdk_app_name.
 * Updated all default AI models to the latest versions.
-*
+
 ##### v9.5.15.2.09 (November 2023)
 * Enhanced Android SDK to support a new feature for voice capture.
 * Enhanced Android SDK to support a new face focus model for improved quality at the time of capture.
