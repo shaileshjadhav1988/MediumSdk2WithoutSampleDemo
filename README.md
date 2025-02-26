@@ -149,22 +149,42 @@ The main features supported in this SDK are:
     
     //IdentityFull SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-sdk:9.6.24.2.15'     
+         implementation 'com.idmission.sdk2:idmission-sdk:10.1.4.2.03'     
+    }
+
+    //IdentityFullWithoutModels SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-fullsdkwithoutmodels:10.1.4.2.03'     
     }
     
     //IdentityMedium SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-mediumsdk:9.6.24.2.15'     
+         implementation 'com.idmission.sdk2:idmission-mediumsdk:10.1.4.2.03'     
+    }
+
+    //IdentityMediumWithoutModels SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-mediumsdkwithoutmodels:10.1.4.2.03'     
     }
     
     //IdentityLite SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-litesdk:9.6.24.2.15'     
+         implementation 'com.idmission.sdk2:idmission-litesdk:10.1.4.2.03'     
+    }
+    
+    //IdentityLiteWithoutModels SDK
+    dependencies {  
+         implementation 'com.idmission.sdk2:idmission-litesdkwithoutmodels:10.1.4.2.03'     
     }
     
     //IdentityVideoID SDK
     dependencies {  
-         implementation 'com.idmission.sdk2:idmission-videoidsdk:9.6.24.2.15'     
+         implementation 'com.idmission.sdk2:idmission-videoidsdk:10.1.4.2.03'     
+    }
+
+    //IdentityVideoIDWithoutModels SDK
+    dependencies {  
+        implementation 'com.idmission.sdk2:idmission-videoidsdkwithoutmodels:10.1.4.2.03'     
     }
     ```
 
@@ -319,7 +339,7 @@ android {
 }
 
 dependencies {  
-     implementation 'com.idmission.sdk2:signatureLib:9.6.22.1'    
+     implementation 'com.idmission.sdk2:signatureLib:10.01.04.1'    
 }
 
 ```
@@ -397,7 +417,7 @@ android {
 }
 
 dependencies {  
-    implementation 'com.idmission.sdk2:4FingerprintCaptureLib:9.5.9.2' 
+    implementation 'com.idmission.sdk2:4FingerprintCaptureLib:9.5.15.1' 
 }
 
 ```
@@ -718,11 +738,14 @@ documentation <a href="./-i-dentity--s-d-k/com.idmission.sdk2.identityproofing/-
 here</a>
 
 ## SDK Flavours
-
 - Identity SDK
+- Identity SDK Without Models
 - IdentityMedium SDK
+- IdentityMedium SDK Without Models
 - IdentityLite SDK
+- IdentityLite SDK Without Models
 - IdentityVideoID SDK
+- IdentityVideoID SDK Without Models
 
 ## SDK Flavours Supported Features
 
@@ -731,7 +754,7 @@ here</a>
 |                         | <B>Identity SDK | <B>IdentityMedium SDK | <B>IdentityLite SDK | <B>IdentityVideoID SDK |
 |     Document Detect     |    On Device    |       On Device       |      On Device      |       On Device        |
 |    Rotate, crop etc.    |    On Device    |       On Server       |      On Server      |       On Device        |
-|    Document Realness    |    On Device    |       On Server       |      On Server      |       On Device        |
+|    Document Realness    |    On Device    |       On Device       |      On Server      |       On Device        |
 | Document Classification |    On Device    |       On Server       |      On Server      |       On Device        |
 |   MRZ/Barcode reading   |    On Device    |       On Device       |      On Server      |       On Device        |
 |     OCR from front      |    On Server    |       On Server       |      On Server      |       On Server        |
@@ -741,6 +764,15 @@ here</a>
 |        Video ID         |       N/A       |          N/A          |         N/A         |       On Device        |
 
 ## SDK Version History
+#### v10.1.4.2.03 (26th February 2025)
+* Reduced the overall size of SDK.
+* Added configuration options to change the sequence of ID and Selfie capture.
+* Added support for the face mask detection model in the Medium version of the Android SDK.
+* Updated libraries to comply with Google Play Policy changes for READ_MEDIA_IMAGES and READ_MEDIA_VIDEO.
+* Added support to customize overlay and instruction images.
+* Non-English data fields are included in the response.
+* Updated all default AI models to the latest versions.
+
 #### v9.6.24.2.15 (03rd December 2024)
 * Improved capture quality with model updates that notify users of obstructions over key ID information.
 
