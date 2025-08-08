@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.idmission.sdk2.R
 import com.idmission.sdk2.capture.analysis.helpers.FaceMatch
 import com.idmission.sdk2.capture.presentation.camera.helpers.ProcessedCapture
 
@@ -59,6 +58,18 @@ internal class PhotoResultsViewHolder(itemView: View) : RecyclerView.ViewHolder(
             is ProcessedCapture.LiveFaceDetectionResult.TimeOut -> bindTimeOutLiveFaceResult(
                 processedCapture
             )
+
+            is ProcessedCapture.DocumentDetectionResult.TimeOutAutofillDocument -> TODO()
+            is ProcessedCapture.DocumentDetectionResult.TimeOutDocument -> TODO()
+            is ProcessedCapture.DocumentDetectionResult.TimeOutIdDocument -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.FailedIdMatch -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.FailedIdToIdFaceMatch -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.FailedIdToLiveFaceMatch -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.FailedReadText -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.ImageFrames -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.LiveFaceLost -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.TimeOut -> TODO()
+            is ProcessedCapture.VideoIdDetectionResult.Video -> TODO()
         }
 //        Log.i("PhotoResultsViewHolder", "Photo $number")
 //        Log.i("PhotoResultsViewHolder", "timeStartedAt:      ${

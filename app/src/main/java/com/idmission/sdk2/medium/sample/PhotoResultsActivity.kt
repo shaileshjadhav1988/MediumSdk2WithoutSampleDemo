@@ -10,14 +10,13 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
-import com.idmission.sdk2.R
 import com.idmission.sdk2.capture.IdMissionCaptureLauncher
 import com.idmission.sdk2.capture.presentation.camera.helpers.ProcessedCapture
 import com.idmission.sdk2.client.model.CommonApiResponse
 import com.idmission.sdk2.client.model.HostDataResponse
 import com.idmission.sdk2.client.model.Response
 import com.idmission.sdk2.identityproofing.IdentityProofingSDK
-import kotlinx.android.synthetic.main.activity_photo_results.*
+import com.idmission.sdk2.medium.sample.databinding.ActivityPhotoResultsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +26,7 @@ import kotlinx.serialization.json.Json
 import org.json.JSONObject
 
 internal class PhotoResultsActivity : Activity() {
-
+    private lateinit var binding : ActivityPhotoResultsBinding
     companion object {
 
         fun launch(activity: Activity, processedCaptures: List<ProcessedCapture>) {
@@ -44,12 +43,14 @@ internal class PhotoResultsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo_results)
+        binding = ActivityPhotoResultsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bt_done.setOnClickListener {
+        binding.btDone.setOnClickListener {
             finish()
         }
-        photoResultToolbar.apply {
+
+        binding.photoResultToolbar.apply {
             setTitleTextColor(ContextCompat.getColor(this@PhotoResultsActivity, R.color.white))
             setNavigationIcon(com.idmission.sdk2.capture.R.drawable.arrow_back)
             setNavigationOnClickListener { finish() }
@@ -71,16 +72,28 @@ internal class PhotoResultsActivity : Activity() {
                 is ProcessedCapture.DocumentDetectionResult.SpoofDocument -> showDocumentImages(processedCaptures)
                 is ProcessedCapture.LiveFaceDetectionResult.RealFace -> showFaceImages(processedCaptures)
                 is ProcessedCapture.LiveFaceDetectionResult.SpoofFace -> showFaceImages(processedCaptures)
+                is ProcessedCapture.DocumentDetectionResult.TimeOutAutofillDocument -> TODO()
+                is ProcessedCapture.DocumentDetectionResult.TimeOutDocument -> TODO()
+                is ProcessedCapture.DocumentDetectionResult.TimeOutIdDocument -> TODO()
+                is ProcessedCapture.LiveFaceDetectionResult.TimeOut -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.FailedIdMatch -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.FailedIdToIdFaceMatch -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.FailedIdToLiveFaceMatch -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.FailedReadText -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.ImageFrames -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.LiveFaceLost -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.TimeOut -> TODO()
+                is ProcessedCapture.VideoIdDetectionResult.Video -> TODO()
             }
         }
     }
 
     private fun showFaceImages(processedCaptures: List<ProcessedCapture>) {
         val detection = processedCaptures[0] as ProcessedCapture.LiveFaceDetectionResult.RealFace
-        Glide.with(photoResultImageView).load(detection.file)
+        Glide.with(binding.photoResultImageView).load(detection.file)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true).into(photoResultImageView)
-        realSpoofTextView.text = "${realSpoofTextView.context.getString(R.string.real)}\t${detection.livenessScore}"
+            .skipMemoryCache(true).into(binding.photoResultImageView)
+        binding.realSpoofTextView.text = "${binding.realSpoofTextView.context.getString(R.string.real)}\t${detection.livenessScore}"
 
     }
 
@@ -88,15 +101,15 @@ internal class PhotoResultsActivity : Activity() {
     private fun showDocumentImages(processedCaptures: List<ProcessedCapture>) {
         val frontDetection = processedCaptures[1] as ProcessedCapture.DocumentDetectionResult
         .RealDocument
-        Glide.with(docFrontImageView).load(frontDetection.file)
+        Glide.with(binding.docFrontImageView).load(frontDetection.file)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true).into(docFrontImageView)
+            .skipMemoryCache(true).into(binding.docFrontImageView)
         if(processedCaptures.size > 2){
             val backDetection = processedCaptures[2] as ProcessedCapture.DocumentDetectionResult
             .RealDocument
-            Glide.with(docBackImageView).load(backDetection.file)
+            Glide.with(binding.docBackImageView).load(backDetection.file)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true).into(docBackImageView)
+                .skipMemoryCache(true).into(binding.docBackImageView)
         }
 
         var extractedDataMap: Map<String, String>? = null
@@ -111,9 +124,9 @@ internal class PhotoResultsActivity : Activity() {
                     mapOf()
                 }
                 if(it.faceMatch != null) {
-                    faceMatchTextView.visibility= View.VISIBLE
+                    binding.faceMatchTextView.visibility= View.VISIBLE
                     val matchText = if (it.faceMatch!!.withinTolerance) "FACE MATCHES" else "FACE DOES NOT MATCH"
-                    faceMatchTextView.text = matchText
+                    binding.faceMatchTextView.text = matchText
 
                 }
             } else {
@@ -123,39 +136,39 @@ internal class PhotoResultsActivity : Activity() {
         val detectedData = getExtractDataFromMap(extractedDataMap!!)
 
         if (!detectedData?.FirstName.isNullOrEmpty()){
-            tv_processed_full_name.setText(detectedData?.FirstName +" "+ (detectedData?.MiddleName +" "+detectedData?.LastName))
+            binding.tvProcessedFullName.setText(detectedData?.FirstName +" "+ (detectedData?.MiddleName +" "+detectedData?.LastName))
         }else{
-            ll_processed_full_name.visibility=View.GONE
+            binding.llProcessedFullName.visibility=View.GONE
         }
         if (!detectedData?.DateofBirth.isNullOrEmpty()){
-            tv_processed_dob.setText(detectedData?.DateofBirth)
+            binding.tvProcessedDob.setText(detectedData?.DateofBirth)
         }else{
-            ll_processed_dob.visibility=View.GONE
+            binding.llProcessedDob.visibility=View.GONE
         }
         if (!detectedData?.AddressLine1.isNullOrEmpty()){
-            tv_processed_address.setText(detectedData?.AddressLine1)
+            binding.tvProcessedAddress.setText(detectedData?.AddressLine1)
         }else{
-            ll_processed_address.visibility=View.GONE
+            binding.llProcessedAddress.visibility=View.GONE
         }
         if (!detectedData?.IDNumber.isNullOrEmpty()){
-            tv_processed_document.setText(detectedData?.IDNumber)
+            binding.tvProcessedDocument.setText(detectedData?.IDNumber)
         }else{
-            ll_processed_document.visibility=View.GONE
+            binding.llProcessedDocument.visibility=View.GONE
         }
         if (!detectedData?.ExpiryDate.isNullOrEmpty()){
-            tv_processed_expiry.setText(detectedData?.ExpiryDate)
+            binding.tvProcessedExpiry.setText(detectedData?.ExpiryDate)
         }else{
-            ll_processed_expiry.visibility=View.GONE
+            binding.llProcessedExpiry.visibility=View.GONE
         }
         if (!detectedData?.IssueDate.isNullOrEmpty()){
-            tv_processed_issue_date.setText(detectedData?.IssueDate)
+            binding.tvProcessedIssueDate.setText(detectedData?.IssueDate)
         }else{
-            ll_processed_issue_date.visibility=View.GONE
+            binding.llProcessedIssueDate.visibility=View.GONE
         }
         if (!detectedData?.Gender.isNullOrEmpty()){
-            tv_processed_gender.setText(detectedData?.Gender)
+            binding.tvProcessedGender.setText(detectedData?.Gender)
         }else{
-            ll_processed_gender.visibility=View.GONE
+            binding.llProcessedGender.visibility=View.GONE
         }
     }
 
@@ -203,96 +216,96 @@ internal class PhotoResultsActivity : Activity() {
 
     private fun setValues(response: Response<CommonApiResponse>) {
         if (response.result?.responseCustomerData !=null){
-            ll_id_data.visibility=View.VISIBLE
-            ll_enrolled_data.visibility = View.VISIBLE
+            binding.llIdData.visibility=View.VISIBLE
+            binding.llEnrolledData.visibility = View.VISIBLE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.firstName.isNullOrEmpty()){
-            tv_full_name.setText(response.result?.responseCustomerData?.extractedPersonalData?.firstName+" "+ (response.result?.responseCustomerData?.extractedPersonalData?.middleName +" "+response.result?.responseCustomerData?.extractedPersonalData?.lastName))
+            binding.tvFullName.setText(response.result?.responseCustomerData?.extractedPersonalData?.firstName+" "+ (response.result?.responseCustomerData?.extractedPersonalData?.middleName +" "+response.result?.responseCustomerData?.extractedPersonalData?.lastName))
         }else{
-            ll_full_name.visibility=View.GONE
+            binding.llFullName.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.dob.isNullOrEmpty()){
-            tv_dob.setText(response.result?.responseCustomerData?.extractedPersonalData?.dob)
+            binding.tvDob.setText(response.result?.responseCustomerData?.extractedPersonalData?.dob)
         }else{
-            ll_dob.visibility=View.GONE
+            binding.llDob.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.addressLine1.isNullOrEmpty()){
-            tv_address.setText(response.result?.responseCustomerData?.extractedPersonalData?.addressLine1+" "+response.result?.responseCustomerData?.extractedPersonalData?.addressLine2)
+            binding.tvAddress.setText(response.result?.responseCustomerData?.extractedPersonalData?.addressLine1+" "+response.result?.responseCustomerData?.extractedPersonalData?.addressLine2)
         }else{
-            ll_address.visibility=View.GONE
+            binding.llAddress.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedIdData?.idNumber.isNullOrEmpty()){
-            tv_document.setText(response.result?.responseCustomerData?.extractedIdData?.idNumber)
+            binding.tvDocument.setText(response.result?.responseCustomerData?.extractedIdData?.idNumber)
         }else{
-            ll_document.visibility=View.GONE
+            binding.llDocument.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedIdData?.idExpirationDate.isNullOrEmpty()){
-            tv_expiry.setText(response.result?.responseCustomerData?.extractedIdData?.idExpirationDate)
+            binding.tvExpiry.setText(response.result?.responseCustomerData?.extractedIdData?.idExpirationDate)
         }else{
-            ll_expiry.visibility=View.GONE
+            binding.llExpiry.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedIdData?.idIssueDate.isNullOrEmpty()){
-            tv_issue_date.setText(response.result?.responseCustomerData?.extractedIdData?.idIssueDate)
+            binding.tvIssueDate.setText(response.result?.responseCustomerData?.extractedIdData?.idIssueDate)
         }else{
-            ll_issue_date.visibility=View.GONE
+            binding.llIssueDate.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.gender.isNullOrEmpty()){
-            tv_gender.setText(response.result?.responseCustomerData?.extractedPersonalData?.gender)
+            binding.tvGender.setText(response.result?.responseCustomerData?.extractedPersonalData?.gender)
         }else{
-            ll_gender.visibility=View.GONE
+            binding.llGender.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.enrolledDate.isNullOrEmpty()){
-            tv_enrolled_date.setText(response.result?.responseCustomerData?.extractedPersonalData?.enrolledDate)
+            binding.tvEnrolledDate.setText(response.result?.responseCustomerData?.extractedPersonalData?.enrolledDate)
 
         }else{
-            ll_enrolled_date.visibility=View.GONE
+            binding.llEnrolledDate.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedPersonalData?.firstName.isNullOrEmpty()){
-            tv_enrolled_full_name.setText(response.result?.responseCustomerData?.extractedPersonalData?.firstName+" "+ (response.result?.responseCustomerData?.extractedPersonalData?.middleName +" "+response.result?.responseCustomerData?.extractedPersonalData?.lastName))
+            binding.tvEnrolledFullName.setText(response.result?.responseCustomerData?.extractedPersonalData?.firstName+" "+ (response.result?.responseCustomerData?.extractedPersonalData?.middleName +" "+response.result?.responseCustomerData?.extractedPersonalData?.lastName))
 
         }else{
-            ll_enrolled_full_name.visibility=View.GONE
+            binding.llEnrolledFullName.visibility=View.GONE
         }
-        ll_client_customer_number.visibility = View.GONE
+        binding.llClientCustomerNumber.visibility = View.GONE
 
         if (!response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage.isNullOrEmpty()){
-            rl_live_result.visibility = View.VISIBLE
-            Glide.with(live_image).load(response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage)
+            binding.rlLiveResult.visibility = View.VISIBLE
+            Glide.with(binding.liveImage).load(response.result?.responseCustomerData?.extractedPersonalData?.enrolledFaceImage)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true).into(live_image)
+                .skipMemoryCache(true).into(binding.liveImage)
         }else{
-            live_image.visibility=View.GONE
+            binding.liveImage.visibility=View.GONE
         }
         if (!response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront.isNullOrEmpty()){
-            ll_doc_image.visibility = View.VISIBLE
-            Glide.with(iv_doc_image).load(response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront)
+            binding.llDocImage.visibility = View.VISIBLE
+            Glide.with(binding.ivDocImage).load(response.result?.responseCustomerData?.extractedIdData?.idProcessImageFront)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true).into(iv_doc_image)
+                .skipMemoryCache(true).into(binding.ivDocImage)
         }else{
-            iv_doc_image.visibility = View.GONE
+            binding.ivDocImage.visibility = View.GONE
         }
         if(response.result?.responseCustomerData?.hostData !=null){
-            kyc_dmv_result.visibility = View.VISIBLE
+            binding.kycDmvResult.visibility = View.VISIBLE
             val dmvResult = getDmvResult(response.result?.responseCustomerData?.hostData!!)
             val kycResult = getAmlKycResult(response.result?.responseCustomerData?.hostData!!)
-            iv_dmv_result.setColorFilter(resources.getColor(
+            binding.ivDmvResult.setColorFilter(resources.getColor(
                 dmvResult.second))
-            tv_dmv_result.text = kycResult.first
-            iv_kyc_result.setColorFilter(resources.getColor(
+            binding.tvDmvResult.text = kycResult.first
+            binding.ivKycResult.setColorFilter(resources.getColor(
                 kycResult.second))
-            tv_kyc_result.text = kycResult.first
+            binding.tvKycResult.text = kycResult.first
 
             if(response.result?.responseCustomerData?.hostData!!.pepresult!=null){
                 val pepResult = getResult(response.result?.responseCustomerData?.hostData!!.pepresult?.resultCountPEP)
-                setHostResult(pepResult,iv_pep_status)
+                setHostResult(pepResult,binding.ivPepStatus)
             }
             if(response.result?.responseCustomerData?.hostData!!.wlsresult!=null){
                 val wlsResult = getResult(response.result?.responseCustomerData?.hostData!!.wlsresult?.resultCountWLS)
-                setHostResult(wlsResult,iv_wl_status)
+                setHostResult(wlsResult,binding.ivWlStatus)
             }
             if(response.result?.responseCustomerData?.hostData!!.nmresult!=null){
                 val nmResult = getResult(response.result?.responseCustomerData?.hostData!!.nmresult?.resultCountNM)
-                setHostResult(nmResult,tv_nm_status)
+                setHostResult(nmResult,binding.tvNmStatus)
             }
 
         }

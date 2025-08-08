@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.idmission.sdk2.R
 import com.idmission.sdk2.capture.IdMissionCaptureLauncher
 import com.idmission.sdk2.capture.presentation.camera.helpers.CaptureBack
 import com.idmission.sdk2.capture.presentation.camera.helpers.ProcessedCapture
@@ -14,8 +13,10 @@ import com.idmission.sdk2.client.model.CountryMaster
 import com.idmission.sdk2.client.model.IdTypeMaster
 import com.idmission.sdk2.client.model.StateMasterVO
 import com.idmission.sdk2.identityproofing.IdentityProofingSDK
+import com.idmission.sdk2.medium.sample.databinding.ActivityServiceCallBinding
 
 class ServiceCallActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityServiceCallBinding
     private var processedCaptures: List<ProcessedCapture>? = null
     private var idTypeAdapter: ArrayAdapter<IdTypeMaster>? = null
     private var countryAdapter: ArrayAdapter<CountryMaster>? = null
@@ -27,14 +28,15 @@ class ServiceCallActivity : AppCompatActivity() {
     var countries: List<CountryMaster> = emptyList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service_call)
+        binding = ActivityServiceCallBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupArrayAdapters()
         setListener()
     }
 
     private fun setListener() {
         // Service ID 50 with
-        findViewById<Button>(R.id.service_id_50).setOnClickListener {
+        binding.serviceId50.setOnClickListener {
             showOptionsAlertDialog()
         }
 //

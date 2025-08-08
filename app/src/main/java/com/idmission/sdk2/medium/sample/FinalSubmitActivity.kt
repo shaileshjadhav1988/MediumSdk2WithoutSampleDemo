@@ -4,13 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.idmission.sdk2.R
-import kotlinx.android.synthetic.main.activity_final_submit.*
-import kotlinx.android.synthetic.main.activity_final_submit.photoResultToolbar
-import kotlinx.android.synthetic.main.activity_photo_results.*
+import com.idmission.sdk2.medium.sample.databinding.ActivityFinalSubmitBinding
 
 
 class FinalSubmitActivity : Activity() {
+    private lateinit var binding: ActivityFinalSubmitBinding
     companion object {
         const val APP_CACHE = "app_cache"
         const val SUBMISSION_RESULT = "submission_result"
@@ -25,9 +23,10 @@ class FinalSubmitActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_final_submit)
+        binding = ActivityFinalSubmitBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        photoResultToolbar.apply {
+        binding.photoResultToolbar.apply {
             setTitleTextColor(ContextCompat.getColor(this@FinalSubmitActivity, R.color.white))
             setNavigationIcon(com.idmission.sdk2.capture.R.drawable.arrow_back)
             setNavigationOnClickListener { finish() }
