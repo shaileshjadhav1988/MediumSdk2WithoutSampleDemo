@@ -62,6 +62,6 @@ dependencies {
 
 
     implementation 'com.google.code.gson:gson:2.8.8'
-    implementation 'com.idmission.sdk2:idmission-mediumsdk:10.1.15.2.07'
+    implementation 'com.idmission.sdk2:idmission-mediumsdkwithoutmodels:10.1.15.2.07'
 
 }
